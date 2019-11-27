@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -46,6 +47,7 @@ public class RegisActivity extends AppCompatActivity {
         final String message2 = editText2.getText().toString();
         EditText editText3 = (EditText)findViewById(R.id.editText7);
         final String message3 = editText3.getText().toString();
+        database = FirebaseDatabase.getInstance().getReference();
         pesan=hasil.concat("-");
         pesan=pesan.concat(message2);
         pesan=pesan.concat("-");
@@ -86,18 +88,19 @@ public class RegisActivity extends AppCompatActivity {
                                 clubkey = childSnapshot.getKey();
                             }
                             if (clubkey.equals("")){
-                                editText.setError("Nomor Telepon Sudah terdaftar");
-                            }
-                            else{
                                 Intent intent = new Intent(RegisActivity.this, VerifActivity.class);
                                 intent.putExtra(EXTRA_MESSAGEEE,pesan);
                                 startActivity(intent);
+
+                            }
+                            else{
+                                editText.setError("Nomor Telepon Sudah terdaftar");
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            editText.setError("Nomor Telepon Sudah terdaftar");
+                            editText.setError("Nomor Telepon Tidak terdaftar");
                         }
                     });
         }
