@@ -67,4 +67,5 @@
     <string name="logout">Logout</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

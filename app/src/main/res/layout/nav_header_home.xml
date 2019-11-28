@@ -34,4 +34,11 @@
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle" />
 
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_profile"
+        android:onClick="pindahh"/>
+
 </LinearLayout>

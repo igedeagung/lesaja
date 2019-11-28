@@ -62,6 +62,14 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        super.onStart();
+        FirebaseUser currentUser= mAuth.getCurrentUser();
+
+        if(currentUser==null){
+            Intent loginIntent= new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("nama");
@@ -103,16 +111,11 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        FirebaseUser currentUser= mAuth.getCurrentUser();
 
-        if(currentUser==null){
-            Intent loginIntent= new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(loginIntent);
-            finish();
-        }
+
+    public void pindahh(View v){
+        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override
