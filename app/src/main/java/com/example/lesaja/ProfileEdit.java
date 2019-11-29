@@ -116,4 +116,7 @@ public class ProfileEdit extends AppCompatActivity {
             finish();
         }
     }
+    public void Balikk(View arg0){
+        finish();
+    }
     }

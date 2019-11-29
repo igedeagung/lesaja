@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rencana extends Fragment {
 
     private String uid;
@@ -34,7 +38,8 @@ public class Rencana extends Fragment {
         i=0;
 //                rencana = root.findViewById(R.id.textView15);
 //                rencana.setText("HHHHHHHH");
-        // Get your reference to the node with all the entries
+
+         //Get your reference to the node with all the entries
         ref = FirebaseDatabase.getInstance().getReference().child("les");
 
         // Query for all entries with a certain child with value equal to something
@@ -42,17 +47,27 @@ public class Rencana extends Fragment {
 
         // Add listener for Firebase response on said query
         allPostFromAuthor.addValueEventListener( new ValueEventListener(){
-            String[] hasil;
+            List<String> hasil=new ArrayList<>();
+            String putty;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot post : dataSnapshot.getChildren() ){
                     // Iterate through all posts with the same author
-                    hasil[i]=post.getValue().toString() ;
-                    i++;
+                    hasil.add("Mata Pelajaran: "+post.child("matpel").getValue().toString()+"\n"+"Jenjang: "+post.child("jenjang").getValue().toString()+"\n"+"Jam: "+post.child("jam").getValue().toString()+"\n"+"Tanggal: "+post.child("tanggal").getValue().toString());
                 }
-                rencana = root.findViewById(R.id.textView15);
-
+                LinearLayout roott=(LinearLayout)root.findViewById(R.id.master);
+                TextView t[]=new TextView[10];
+                LinearLayout.LayoutParams dim=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                dim.setMargins(90,210,0,0);
+                for(int j=0;j<hasil.size();j++)
+                {
+                    t[j]=new TextView(Rencana.this.getActivity());
+                    t[j].setLayoutParams(dim);
+                    t[j].setText(hasil.get(j));
+                    roott.addView(t[j]);
+                }
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}

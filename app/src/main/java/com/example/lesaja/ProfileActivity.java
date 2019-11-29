@@ -77,4 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
     }
+    public void Balikkk(View arg0){
+        finish();
+    }
 }
