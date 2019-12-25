@@ -2,7 +2,9 @@ package com.example.lesaja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -74,8 +76,6 @@ public class TambahLesActivity extends AppCompatActivity {
         {
             root.setBackgroundColor(Color.parseColor("#2CB5FA"));
         }
-
-
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             private void updateLabel() {
